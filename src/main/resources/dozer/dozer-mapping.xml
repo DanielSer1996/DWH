@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://dozer.sourceforge.net
+      http://dozer.sourceforge.net/schema/beanmapping.xsd">
+    <mapping type="one-way">
+        <class-a>i5b5.wajaty.hd.projekt.model.sources.entities.Client</class-a>
+        <class-b>i5b5.wajaty.hd.projekt.model.dwh.Client</class-b>
+        <field-exclude>
+            <a>clientId</a>
+            <b>clientId</b>
+        </field-exclude>
+        <field>
+            <a>clientMonthlyIncome</a>
+            <b>clientIncome</b>
+        </field>
+    </mapping>
+    <mapping type="one-way">
+        <class-a>i5b5.wajaty.hd.projekt.model.sources.entities.SubscriptionType</class-a>
+        <class-b>i5b5.wajaty.hd.projekt.model.dwh.SubscriptionType</class-b>
+        <field-exclude>
+            <a>subscriptionTypeId</a>
+            <b>subscriptionTypeId</b>
+        </field-exclude>
+        <field>
+            <a>subscriptionTypeDescr</a>
+            <b>subcriptionDescription</b>
+        </field>
+    </mapping>
+    <mapping type="one-way">
+        <class-a>i5b5.wajaty.hd.projekt.model.sources.localisation.Province</class-a>
+        <class-b>i5b5.wajaty.hd.projekt.model.dwh.Province</class-b>
+        <field-exclude>
+            <a>provinceId</a>
+            <b>provinceId</b>
+        </field-exclude>
+    </mapping>
+    <mapping type="one-way">
+        <class-a>i5b5.wajaty.hd.projekt.model.sources.localisation.District</class-a>
+        <class-b>i5b5.wajaty.hd.projekt.model.dwh.District</class-b>
+        <field-exclude>
+            <a>districtId</a>
+            <b>districtId</b>
+        </field-exclude>
+        <field-exclude>
+            <a>provinceId</a>
+            <b>provinceId</b>
+        </field-exclude>
+    </mapping>
+    <mapping type="one-way">
+        <class-a>i5b5.wajaty.hd.projekt.model.sources.localisation.Locality</class-a>
+        <class-b>i5b5.wajaty.hd.projekt.model.dwh.Locality</class-b>
+        <field-exclude>
+            <a>localityId</a>
+            <b>localityId</b>
+        </field-exclude>
+        <field-exclude>
+            <a>districtId</a>
+            <b>districtId</b>
+        </field-exclude>
+    </mapping>
+    <mapping type="one-way">
+        <class-a>i5b5.wajaty.hd.projekt.model.sources.call.Call</class-a>
+        <class-b>i5b5.wajaty.hd.projekt.model.dwh.Call</class-b>
+        <field-exclude>
+            <a>callId</a>
+            <b>callId</b>
+        </field-exclude>
+    </mapping>
+    <mapping type="one-way">
+        <class-a>i5b5.wajaty.hd.projekt.model.sources.call.CallPrice</class-a>
+        <class-b>i5b5.wajaty.hd.projekt.model.dwh.CallPrice</class-b>
+        <field-exclude>
+            <a>callPriceId</a>
+            <b>callPriceId</b>
+        </field-exclude>
+    </mapping>
+    <mapping type="one-way">
+        <class-a>i5b5.wajaty.hd.projekt.model.sources.message.Message</class-a>
+        <class-b>i5b5.wajaty.hd.projekt.model.dwh.Message</class-b>
+        <field-exclude>
+            <a>messageId</a>
+            <b>messageId</b>
+        </field-exclude>
+    </mapping>
+    <mapping type="one-way">
+        <class-a>i5b5.wajaty.hd.projekt.model.sources.message.MessagePrice</class-a>
+        <class-b>i5b5.wajaty.hd.projekt.model.dwh.MessagePrice</class-b>
+        <field-exclude>
+            <a>messagePriceId</a>
+            <b>messagePriceId</b>
+        </field-exclude>
+    </mapping>
+    <mapping type="one-way">
+        <class-a>i5b5.wajaty.hd.projekt.model.sources.network.NetworkSession</class-a>
+        <class-b>i5b5.wajaty.hd.projekt.model.dwh.NetworkSession</class-b>
+        <field-exclude>
+            <a>networkSessionId</a>
+            <b>networkSessionId</b>
+        </field-exclude>
+        <field>
+            <a>networkSessionKbAmount</a>
+            <b>networkSessionKbsAmount</b>
+        </field>
+    </mapping>
+    <mapping type="one-way">
+        <class-a>i5b5.wajaty.hd.projekt.model.sources.network.NetworkSessionPrice</class-a>
+        <class-b>i5b5.wajaty.hd.projekt.model.dwh.NetworkSessionPrice</class-b>
+        <field-exclude>
+            <a>networkSessionPriceId</a>
+            <b>networkSessionPriceId</b>
+        </field-exclude>
+    </mapping>
+    <mapping type="one-way">
+        <class-a>i5b5.wajaty.hd.projekt.model.sources.tv.TvChannel</class-a>
+        <class-b>i5b5.wajaty.hd.projekt.model.dwh.TvChannel</class-b>
+        <field-exclude>
+            <a>tvChannelId</a>
+            <b>tvChannelId</b>
+        </field-exclude>
+        <field>
+            <a>name</a>
+            <b>tvChannelName</b>
+        </field>
+    </mapping>
+    <mapping type="one-way">
+        <class-a>i5b5.wajaty.hd.projekt.model.sources.tv.TvTransmission</class-a>
+        <class-b>i5b5.wajaty.hd.projekt.model.dwh.TvTransmission</class-b>
+        <field-exclude>
+            <a>tvTrasnsmissionId</a>
+            <b>tvTrasnsmissionId</b>
+        </field-exclude>
+    </mapping>
+</mappings>

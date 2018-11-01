@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="i5b5.wajaty.hd.projekt.mybatis.mappers.TvMapper">
+    <select id="getAllProvinces" resultType="i5b5.wajaty.hd.projekt.model.sources.localisation.Province">
+        select *
+        from PROVINCE
+    </select>
+    <select id="getAllDistricts" resultType="i5b5.wajaty.hd.projekt.model.sources.localisation.District">
+        select *
+        from DISTRICT
+    </select>
+    <select id="getAllLocalities" resultType="i5b5.wajaty.hd.projekt.model.sources.localisation.Locality">
+        select *
+        from LOCALITY
+    </select>
+    <select id="getAllSubscriptionTypes"
+            resultType="i5b5.wajaty.hd.projekt.model.sources.entities.SubscriptionType">
+        select *
+        from SUBSCRIPTION_TYPE
+    </select>
+    <select id="getAllClients" resultType="i5b5.wajaty.hd.projekt.model.sources.entities.Client">
+        select *
+        from CLIENT
+    </select>
+    <select id="getAllTvChannels" resultType="i5b5.wajaty.hd.projekt.model.sources.tv.TvChannel">
+        select *
+        from TV_CHANNEL;
+    </select>
+    <select id="getAllTvTransmissions" resultType="i5b5.wajaty.hd.projekt.model.sources.tv.TvTransmission">
+        select *
+        from TV_TRANSMISSION;
+    </select>
+
+</mapper>

@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="i5b5.wajaty.hd.projekt.mybatis.mappers.DwhMapper">
+
+    <resultMap id="keysMap" type="i5b5.wajaty.hd.projekt.model.dwh.mappers.MappingClass">
+        <result column="DWH_ID" property="dwhId"/>
+        <result column="source_sys_no" property="sourceSystemNo"/>
+        <result column="source_key_val" property="sourceSystemKey"/>
+    </resultMap>
+
+    <select id="findDwhKeyForSourceSystemAndKey"
+            resultMap="keysMap">
+        SELECT
+            ${columnName} DWH_ID,
+            source_sys_no,
+            source_key_val
+        FROM ${tablename}
+        WHERE source_sys_no = #{sourceSystem, jdbcType=NUMERIC}
+              AND source_key_val = #{sourceKey, jdbcType=VARCHAR}
+    </select>
+
+    <select id="getNextKeyForTable" resultType="long">
+        select nextval('dwh.${sequenceName}')
+    </select>
+
+    <select id="findLastActiveClientRow" resultType="i5b5.wajaty.hd.projekt.model.dwh.Client">
+        select *
+        from CLIENT
+        where CLIENT_ID = #{dwhKey, jdbcType=NUMERIC}
+        order by START_DATE desc
+        limit 1
+    </select>
+
+    <select id="findLastActiveProvinceRow" resultType="i5b5.wajaty.hd.projekt.model.dwh.Province">
+        select *
+        from PROVINCE
+        where PROVINCE_ID = #{dwhKey, jdbcType=NUMERIC}
+        order by START_DATE desc
+        limit 1
+    </select>
+    <select id="findLastActiveDistrictRow" resultType="i5b5.wajaty.hd.projekt.model.dwh.District">
+        select *
+        from DISTRICT
+        where district_id = #{dwhKey, jdbcType=NUMERIC}
+        order by START_DATE desc
+        limit 1
+    </select>
+    <select id="findLastActiveLocalityRow" resultType="i5b5.wajaty.hd.projekt.model.dwh.Locality">
+        select *
+        from LOCALITY
+        where LOCALITY_ID = #{dwhKey, jdbcType=NUMERIC}
+        order by START_DATE desc
+        limit 1
+    </select>
+    <select id="findLastActiveCallPriceRow" resultType="i5b5.wajaty.hd.projekt.model.dwh.CallPrice">
+        select *
+        from CALL_PRICE_LIST
+        where CALL_PRICE_ID = #{dwhKey, jdbcType=NUMERIC}
+        order by START_DATE desc
+        limit 1
+    </select>
+    <select id="findLastActiveSubscriptionTypeRow"
+            resultType="i5b5.wajaty.hd.projekt.model.dwh.SubscriptionType">
+        select *
+        from SUBSCRIPTION_TYPE
+        where SUBSCRIPTION_TYPE_ID = #{dwhKey, jdbcType=NUMERIC}
+        order by START_DATE desc
+        limit 1
+    </select>
+    <select id="findLastActiveMessagePriceRow" resultType="i5b5.wajaty.hd.projekt.model.dwh.MessagePrice">
+        select *
+        from MESSAGE_PRICE_LIST
+        where MESSAGE_PRICE_ID = #{dwhKey, jdbcType=NUMERIC}
+        order by START_DATE desc
+        limit 1
+    </select>
+    <select id="findLastActiveMessageRow" resultType="i5b5.wajaty.hd.projekt.model.dwh.Message">
+        select *
+        from MESSAGE_LIST
+        where MESSAGE_ID = #{dwhKey, jdbcType=NUMERIC}
+        order by START_DATE desc
+        limit 1
+    </select>
+    <select id="findLastActiveTvChannelRow" resultType="i5b5.wajaty.hd.projekt.model.dwh.TvChannel">
+        select *
+        from TV_CHANNEL
+        where TV_CHANNEL_ID = #{dwhKey, jdbcType=NUMERIC}
+        order by START_DATE desc
+        limit 1
+    </select>
+    <select id="findLastActiveNetworkSessionPriceRow"
+            resultType="i5b5.wajaty.hd.projekt.model.dwh.NetworkSessionPrice">
+        select *
+        from NETWORK_SESSION_PRICE_LIST
+        where NETWORK_SESSION_PRICE_ID = #{dwhKey, jdbcType=NUMERIC}
+        order by START_DATE desc
+        limit 1
+    </select>
+
+    <update id="closeClientRow">
+        update CLIENT
+        set END_DATE = current_timestamp
+        where CLIENT_ID = #{dwhKey, jdbcType=NUMERIC}
+              and END_DATE is null
+    </update>
+    <update id="closeProvinceRow">
+        update PROVINCE
+        set END_DATE = current_timestamp
+        where PROVINCE_ID = #{dwhKey, jdbcType=NUMERIC}
+              and END_DATE is null
+    </update>
+    <update id="closeDistrictRow">
+        update DISTRICT
+        set END_DATE = current_timestamp
+        where DISTRICT_ID = #{dwhKey, jdbcType=NUMERIC}
+              and END_DATE is null
+    </update>
+    <update id="closeLocalityRow">
+        update LOCALITY
+        set END_DATE = current_timestamp
+        where LOCALITY_ID = #{dwhKey, jdbcType=NUMERIC}
+              and END_DATE is null
+    </update>
+    <update id="closeCallPriceRow">
+        update CALL_PRICE_LIST
+        set END_DATE = current_timestamp
+        where CALL_PRICE_ID = #{dwhKey, jdbcType=NUMERIC}
+              and END_DATE is null
+    </update>
+    <update id="closeSubscriptionTypeRow">
+        update SUBSCRIPTION_TYPE
+        set END_DATE = current_timestamp
+        where SUBSCRIPTION_TYPE_ID = #{dwhKey, jdbcType=NUMERIC}
+              and END_DATE is null
+    </update>
+    <update id="closeMessagePriceRow">
+        update MESSAGE_PRICE_LIST
+        set END_DATE = current_timestamp
+        where MESSAGE_PRICE_ID = #{dwhKey, jdbcType=NUMERIC}
+              and END_DATE is null
+    </update>
+    <update id="closeMessageRow">
+        update MESSAGE_LIST
+        set END_DATE = current_timestamp
+        where MESSAGE_PRICE_ID = #{dwhKey, jdbcType=NUMERIC}
+              and END_DATE is null
+    </update>
+    <update id="closeTvChannelRow">
+        update TV_CHANNEL
+        set END_DATE = current_timestamp
+        where TV_CHANNEL_ID = #{dwhKey, jdbcType=NUMERIC}
+              and END_DATE is null
+    </update>
+    <update id="closeNetworkSessionPriceRow">
+        update NETWORK_SESSION_PRICE_LIST
+        set END_DATE = current_timestamp
+        where NETWORK_SESSION_PRICE_ID = #{dwhKey, jdbcType=NUMERIC}
+              and END_DATE is null
+    </update>
+
+    <insert id="insertNewClientRow">
+        insert into CLIENT (CLIENT_ID, CLIENT_PESEL, CLIENT_NAME, CLIENT_SURNAME, CLIENT_AGE, CLIENT_INCOME ,START_DATE, END_DATE)
+        values (
+            #{client.clientId, jdbcType=NUMERIC},
+            #{client.clientPesel, jdbcType=VARCHAR},
+            #{client.clientName, jdbcType=VARCHAR},
+            #{client.clientSurname, jdbcType=VARCHAR},
+            #{client.clientAge, jdbcType=NUMERIC},
+            #{client.clientIncome, jdbcType=DECIMAL},
+            current_timestamp,
+            null
+        )
+    </insert>
+    <insert id="insertNewProvinceRow">
+        insert into PROVINCE (PROVINCE_ID, PROVINCE_NAME, START_DATE, END_DATE)
+        values (
+            #{province.provinceId, jdbcType=NUMERIC},
+            #{province.provinceName, jdbcType=VARCHAR},
+            current_timestamp,
+            null
+        )
+    </insert>
+    <insert id="insertNewDistrictRow">
+        insert into DISTRICT (DISTRICT_ID, DISTRICT_NAME, START_DATE, END_DATE, PROVINCE_ID)
+        values (
+            #{district.districtId, jdbcType=NUMERIC},
+            #{district.districtName, jdbcType=VARCHAR},
+            current_timestamp,
+            null,
+            #{district.provinceId, jdbcType=NUMERIC}
+        )
+    </insert>
+    <insert id="insertNewLocalityRow">
+        insert into LOCALITY (LOCALITY_ID, LOCALITY_NAME, START_DATE, END_DATE, DISTRICT_ID)
+        values (
+            #{locality.localityId, jdbcType=NUMERIC},
+            #{locality.localityName, jdbcType=VARCHAR},
+            current_timestamp,
+            null,
+            #{locality.districtId, jdbcType=NUMERIC}
+        )
+    </insert>
+    <insert id="insertNewCallPriceRow">
+        insert into CALL_PRICE_LIST (CALL_PRICE_ID, CALL_PRICE_PER_MIN, START_DATE, END_DATE)
+        values (
+            #{callPrice.callPriceId, jdbcType=NUMERIC},
+            #{callPrice.callPricePerMin, jdbcType=DECIMAL},
+            current_timestamp,
+            null
+        )
+    </insert>
+    <insert id="insertNewSubscriptionTypeRow">
+        insert into SUBSCRIPTION_TYPE (SUBSCRIPTION_TYPE_ID, SUBSCRIPTION_DESCR, START_DATE, END_DATE)
+        values (
+            #{subscriptionType.subscriptionTypeId, jdbcType=NUMERIC},
+            #{subscriptionType.subcriptionDescription, jdbcType=VARCHAR},
+            current_timestamp,
+            null
+        )
+    </insert>
+    <insert id="insertNewMessagePriceRow">
+        insert into MESSAGE_PRICE_LIST (MESSAGE_PRICE_ID, MESSAGE_PRICE, MESSAGE_TYPE, START_DATE, END_DATE)
+        values (
+            #{messagePrice.messagePriceId, jdbcType=NUMERIC},
+            #{messagePrice.messagePrice, jdbcType=DECIMAL},
+            #{messagePrice.messageType, jdbcType=CHAR},
+            current_timestamp,
+            null
+        )
+    </insert>
+    <insert id="insertNewTvChannelRow">
+        insert into TV_CHANNEL (TV_CHANNEL_ID, TV_CHANNEL_NAME, START_DATE, END_DATE)
+        values (
+            #{tvChannel.tvChannelId, jdbcType=NUMERIC},
+            #{tvChannel.tvChannelName, jdbcType=NUMERIC},
+            current_timestamp,
+            null
+        )
+    </insert>
+    <insert id="insertNewNetworkSessionPriceRow">
+        insert into NETWORK_SESSION_PRICE_LIST (NETWORK_SESSION_PRICE_ID, NETWORK_SESSION_PRICE_PER_KB, START_DATE, END_DATE)
+        values (
+            #{networkSessionPrice.networkSessionPriceId, jdbcType=NUMERIC},
+            #{networkSessionPrice.networkSessionPricePerKb, jdbcType=DECIMAL},
+            current_timestamp,
+            null
+        )
+    </insert>
+    <insert id="insertNewCallRow">
+        insert into CALL (CALL_ID, CALL_PRICE_ID, CLIENT_ID, SUBSCRIPTION_TYPE_ID, LOCALITY_ID, CALL_START_TIME, CALL_END_TIME)
+        values (
+            #{call.callId, jdbcType=NUMERIC},
+            #{call.callPriceId, jdbcType=NUMERIC},
+            #{call.clientId, jdbcType=NUMERIC},
+            #{call.subscriptionTypeId, jdbcType=NUMERIC},
+            #{call.localityId, jdbcType=NUMERIC},
+            #{call.callStartTime, jdbcType=TIMESTAMP},
+            #{call.callEndTime, jdbcType=TIMESTAMP}
+        )
+    </insert>
+    <insert id="insertNewMessageRow">
+        insert into MESSAGE (MESSAGE_ID, CLIENT_ID, MESSAGE_PRICE_ID, SUBSCRIPTION_TYPE_ID, LOCALITY_ID, MESSAGE_DATE, MESSAGE_TYPE, MESSAGE_CHAR_NUMBER)
+        values (
+            #{message.messageId, jdbcType=NUMERIC},
+            #{message.clientId, jdbcType=NUMERIC},
+            #{message.messagePriceId, jdbcType=NUMERIC},
+            #{message.subscriptionTypeId, jdbcType=NUMERIC},
+            #{message.localityId, jdbcType=NUMERIC},
+            #{message.messageDate, jdbcType=DATE},
+            #{message.messageType, jdbcType=CHAR},
+            #{message.messageCharNumber, jdbcType=NUMERIC}
+        )
+    </insert>
+    <insert id="insertNewTvTransmissionRow">
+        insert into TV_TRANSMISSION (TV_TRANSMISSION_ID, CLIENT_ID, SUBSCRIPTION_TYPE_ID, TV_CHANNEL_ID, LOCALITY_ID, TV_TRANSMISSION_LENGTH, TV_TRANSMISSION_DATE)
+        values (
+            #{tvTransmission.tvTransmissionId, jdbcType=NUMERIC},
+            #{tvTransmission.clientId, jdbcType=NUMERIC},
+            #{tvTransmission.subscriptionTypeId, jdbcType=NUMERIC},
+            #{tvTransmission.tvChannelId, jdbcType=NUMERIC},
+            #{tvTransmission.localityId, jdbcType=NUMERIC},
+            #{tvTransmission.tvTransmissionLength, jdbcType=NUMERIC},
+            #{tvTransmission.tvTransmissionDate, jdbcType=DATE}
+        )
+    </insert>
+    <insert id="insertNewNetworkSessionRow">
+        insert into NETWORK_SESSION (NETWORK_SESSION_ID, CLIENT_ID, LOCALITY_ID, NETWORK_SESSION_PRICE_ID, SUBSCRIPTION_TYPE_ID, NETWORK_SESSIONS_KBS_AMOUNT, NETWORK_SESSION_START_TIME, NETWORK_SESSION_END_TIME)
+        values (
+            #{networkSession.networkSessionId, jdbcType=NUMERIC},
+            #{networkSession.clientId, jdbcType=NUMERIC},
+            #{networkSession.localityId, jdbcType=NUMERIC},
+            #{networkSession.networkSessionPriceId, jdbcType=NUMERIC},
+            #{networkSession.subscriptionTypeId, jdbcType=NUMERIC},
+            #{networkSession.networkSessionKbsAmount, jdbcType=NUMERIC},
+            #{networkSession.networkSessionStartTime, jdbcType=TIMESTAMP},
+            #{networkSession.networkSessionEndTime, jdbcType=TIMESTAMP}
+        )
+    </insert>
+    <insert id="insertNewDwhKeyForSourceSystemAndKey">
+        insert into ${tablename} (SOURCE_SYS_NO, SOURCE_KEY_VAL, ${columnName})
+        values (
+            #{sourceSystem, jdbcType=NUMERIC},
+            #{sourceKey, jdbcType=VARCHAR},
+            #{newKey, jdbcType=NUMERIC}
+        )
+    </insert>
+
+    <!--Rejected tables-->
+    <insert id="insertRejectedDistrict">
+        insert into rej_district (source_key_val, source_sys_no, start_date, end_date, district_id, province_id, district_name)
+        values (
+            #{sourceKey, jdbcType=VARCHAR},
+            #{sourceSystem, jdbcType=NUMERIC},
+            null,
+            null,
+            #{district.districtId, jdbcType=NUMERIC},
+            #{district.provinceId, jdbcType=NUMERIC},
+            #{district.districtName, jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertRejectedLocality">
+        insert into rej_locality (source_key_val, source_sys_no, start_date, end_date, locality_id, district_id, locality_name)
+        values (
+            #{sourceKey, jdbcType=VARCHAR},
+            #{sourceSystem, jdbcType=NUMERIC},
+            null,
+            null,
+            #{locality.localityId, jdbcType=NUMERIC},
+            #{locality.districtId, jdbcType=NUMERIC},
+            #{locality.localityName, jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertRejectedNetworkSession">
+        insert into rej_network_session (source_key_val,
+                                         source_sys_no,
+                                         network_session_id,
+                                         client_id,
+                                         locality_id,
+                                         network_session_price_id,
+                                         subscription_type_id,
+                                         network_sessions_kbs_amount,
+                                         network_session_start_time,
+                                         network_session_end_time)
+        values (
+            #{sourceKey, jdbcType=VARCHAR},
+            #{sourceSystem, jdbcType=NUMERIC},
+            #{networkSession.networkSessionId, jdbcType=NUMERIC},
+            #{networkSession.clientId, jdbcType=NUMERIC},
+            #{networkSession.localityId, jdbcType=NUMERIC},
+            #{networkSession.networkSessionPriceId, jdbcType=NUMERIC},
+            #{networkSession.subscriptionTypeId, jdbcType=NUMERIC},
+            #{networkSession.networkSessionKbsAmount, jdbcType=NUMERIC},
+            #{networkSession.networkSessionStartTime, jdbcType=TIMESTAMP},
+            #{networkSession.networkSessionEndTime, jdbcType=TIMESTAMP}
+        )
+    </insert>
+    <insert id="insertRejectedMessage">
+        insert into rej_message (source_key_val,
+                                 source_sys_no,
+                                 message_id,
+                                 client_id,
+                                 message_price_id,
+                                 subscription_type_id,
+                                 locality_id,
+                                 message_date,
+                                 message_type,
+                                 message_char_number)
+        values (
+            #{sourceKey, jdbcType=VARCHAR},
+            #{sourceSystem, jdbcType=NUMERIC},
+            #{message.messageId, jdbcType=NUMERIC},
+            #{message.clientId, jdbcType=NUMERIC},
+            #{message.messagePriceId, jdbcType=NUMERIC},
+            #{message.subscriptionTypeId, jdbcType=NUMERIC},
+            #{message.localityId, jdbcType=NUMERIC},
+            #{message.messageDate, jdbcType=TIMESTAMP},
+            #{message.messageType, jdbcType=CHAR},
+            #{message.messageCharNumber, jdbcType=NUMERIC}
+        )
+    </insert>
+    <insert id="insertRejectedCall">
+        insert into rej_call (source_key_val,
+                              source_sys_no,
+                              call_id,
+                              call_price_id,
+                              client_id,
+                              subscription_type_id,
+                              locality_id,
+                              call_start_time,
+                              call_end_time)
+        values (
+            #{sourceKey, jdbcType=VARCHAR},
+            #{sourceSystem, jdbcType=NUMERIC},
+            #{call.callId, jdbcType=NUMERIC},
+            #{call.callPriceId, jdbcType=NUMERIC},
+            #{call.clientId, jdbcType=NUMERIC},
+            #{call.subscriptionTypeId, jdbcType=NUMERIC},
+            #{call.localityId, jdbcType=NUMERIC},
+            #{call.callStartTime, jdbcType=TIMESTAMP},
+            #{call.callEndTime, jdbcType=TIMESTAMP}
+        )
+    </insert>
+    <insert id="insertRejectedTvTransmission">
+        insert into rej_tv_transmission (source_key_val,
+                                         source_sys_no,
+                                         tv_transmission_id,
+                                         client_id,
+                                         subscription_type_id,
+                                         tv_channel_id,
+                                         locality_id,
+                                         tv_transmission_length,
+                                         tv_transmission_date)
+        values (
+            #{sourceKey, jdbcType=VARCHAR},
+            #{sourceSystem, jdbcType=NUMERIC},
+            #{tvTransmission.tvTransmissionId, jdbcType=NUMERIC},
+            #{tvTransmission.clientId, jdbcType=NUMERIC},
+            #{tvTransmission.subscriptionTypeId, jdbcType=NUMERIC},
+            #{tvTransmission.tvChannelId, jdbcType=NUMERIC},
+            #{tvTransmission.localityId, jdbcType=NUMERIC},
+            #{tvTransmission.tvTransmissionLength, jdbcType=NUMERIC},
+            #{tvTransmission.tvTransmissionDate, jdbcType=NUMERIC}
+        )
+    </insert>
+
+
+</mapper>

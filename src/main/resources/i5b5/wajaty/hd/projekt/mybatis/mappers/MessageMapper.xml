@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="i5b5.wajaty.hd.projekt.mybatis.mappers.MessageMapper">
+    <resultMap id="clientMap" type="i5b5.wajaty.hd.projekt.model.sources.entities.Client">
+        <result column="is_deleted" property="deleted"/>
+        <result column="client_id" property="clientId"/>
+        <result column="client_pesel" property="clientPesel"/>
+        <result column="client_name" property="clientName"/>
+        <result column="client_surname" property="clientSurname"/>
+        <result column="client_monthly_income" property="clientMonthlyIncome"/>
+        <result column="client_birthdate" property="clientBirthdate"/>
+        <result column="last_action_time" property="lastActionTime"/>
+    </resultMap>
+
+    <resultMap id="provinceMap" type="i5b5.wajaty.hd.projekt.model.sources.localisation.Province">
+        <result column="is_deleted" property="deleted"/>
+        <result column="province_id" property="provinceId"/>
+        <result column="province_name" property="provinceName"/>
+        <result column="last_action_time" property="lastActionTime"/>
+    </resultMap>
+
+    <resultMap id="districtMap" type="i5b5.wajaty.hd.projekt.model.sources.localisation.District">
+        <result column="is_deleted" property="deleted"/>
+        <result column="district_id" property="districtId"/>
+        <result column="province_id" property="provinceId"/>
+        <result column="district_name" property="districtName"/>
+        <result column="last_action_time" property="lastActionTime"/>
+    </resultMap>
+
+    <resultMap id="localityMap" type="i5b5.wajaty.hd.projekt.model.sources.localisation.Locality">
+        <result column="is_deleted" property="deleted"/>
+        <result column="district_id" property="districtId"/>
+        <result column="locality_id" property="localityId"/>
+        <result column="locality_name" property="localityName"/>
+        <result column="last_action_time" property="lastActionTime"/>
+    </resultMap>
+
+    <resultMap id="subscriptionTypeMap" type="i5b5.wajaty.hd.projekt.model.sources.entities.SubscriptionType">
+        <result column="is_deleted" property="deleted"/>
+        <result column="subscription_type_id" property="subscriptionTypeId"/>
+        <result column="subscription_type_descr" property="subscriptionTypeDescr"/>
+        <result column="last_action_time" property="lastActionTime"/>
+    </resultMap>
+
+    <resultMap id="messagePriceMap" type="i5b5.wajaty.hd.projekt.model.sources.message.MessagePrice">
+        <result column="is_deleted" property="deleted"/>
+        <result column="message_price_id" property="messagePriceId"/>
+        <result column="message_price" property="messagePrice"/>
+        <result column="message_type" property="messageType"/>
+        <result column="last_action_time" property="lastActionTime"/>
+    </resultMap>
+
+    <resultMap id="messageMap" type="i5b5.wajaty.hd.projekt.model.sources.message.Message">
+        <result column="message_id" property="messageId"/>
+        <result column="subscription_type_id" property="subscriptionTypeId"/>
+        <result column="client_id" property="clientId"/>
+        <result column="message_price_id" property="messagePriceId"/>
+        <result column="message_date" property="messageDate"/>
+        <result column="message_char_number" property="messageCharNumber"/>
+        <result column="message_type" property="messageType"/>
+        <result column="locality_id" property="localityId"/>
+    </resultMap>
+
+    <select id="getAllProvinces" resultMap="provinceMap">
+        select
+            is_deleted,
+            province_id,
+            province_name,
+            last_action_time
+        from PROVINCE
+    </select>
+    <select id="getAllDistricts" resultMap="districtMap">
+        select
+            is_deleted,
+            district_id,
+            province_id,
+            district_name,
+            last_action_time
+        from DISTRICT
+    </select>
+    <select id="getAllLocalities" resultMap="localityMap">
+        select
+            is_deleted,
+            locality_id,
+            district_id,
+            locality_name,
+            last_action_time
+        from LOCALITY
+    </select>
+    <select id="getAllSubscriptionTypes"
+            resultMap="subscriptionTypeMap">
+        select
+            is_deleted,
+            subscription_type_id,
+            subscription_type_descr,
+            last_action_time
+        from SUBSCRIPTION_TYPE
+    </select>
+    <select id="getAllClients" resultMap="clientMap">
+        select
+            is_deleted,
+            client_id,
+            client_pesel,
+            client_name,
+            client_surname,
+            client_monthly_income,
+            client_birthdate,
+            last_action_time
+        from CLIENT
+    </select>
+    <select id="getAllMessagePrices" resultMap="messagePriceMap">
+        select
+            is_deleted,
+            message_price_id,
+            message_price,
+            message_type,
+            last_action_time
+        from MESSAGE_PRICE_LIST
+    </select>
+    <select id="getAllMessages" resultMap="messageMap">
+        select
+            message_id,
+            subscription_type_id,
+            client_id,
+            message_price_id,
+            message_date,
+            message_char_number,
+            message_type,
+            locality_id
+        from MESSAGE
+    </select>
+
+</mapper>
